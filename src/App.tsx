@@ -31,7 +31,7 @@ export const App: React.FC = () => {
   return (
     <div>
       <textarea ref={textAreaRef} style={{ width: '500px', height: '300px'}} defaultValue={code}></textarea>
-      <button onClick={onClick}>编译</button>
+      <button onClick={onClick}>编译1</button>
     </div>
   )
 }
