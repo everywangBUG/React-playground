@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client'
-import App1 from './App1.tsx'
+import { ReactPlayground } from './ReactPlaygound'
 
 createRoot(document.getElementById('root')!).render(
-    <App1 />
+    <ReactPlayground />
 )
