@@ -13,9 +13,13 @@ export const Editor: React.FC = () => {
   `
 
   const handleEditorMount: OnMount = (editor, monaco) => {
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyJ, () => {
+      editor.getAction('editor.action.formatDocument')?.run()
+  }); 
+
     monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
       jsx: monaco.languages.typescript.JsxEmit.Preserve,
-      allowNonTsExtensions: true
+      esModuleInterop: true, // 设置 esModuleInterop 会在编译的时候自动加上 default 属性。
     })
   }
 
