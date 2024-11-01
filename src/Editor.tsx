@@ -1,4 +1,4 @@
-import MonacoEditor from '@monaco-editor/react'
+import MonacoEditor, { OnMount } from '@monaco-editor/react'
 
 export const Editor: React.FC = () => {
   const code = `
@@ -12,11 +12,19 @@ export const Editor: React.FC = () => {
     }
   `
 
+  const handleEditorMount: OnMount = (editor, monaco) => {
+    monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+      jsx: monaco.languages.typescript.JsxEmit.Preserve,
+      allowNonTsExtensions: true
+    })
+  }
+
   return (
     <MonacoEditor 
       height='100%'
       path={'index.tsx'}
       language={'typescript'}
+      onMount={handleEditorMount}
       value={code}
     />
   )
