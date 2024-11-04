@@ -1,4 +1,5 @@
 import MonacoEditor, { OnMount } from '@monaco-editor/react'
+import { createATA } from './ata'
 
 export const Editor: React.FC = () => {
   const code = `
@@ -15,13 +16,25 @@ export const Editor: React.FC = () => {
   const handleEditorMount: OnMount = (editor, monaco) => {
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyJ, () => {
       editor.getAction('editor.action.formatDocument')?.run()
-  }); 
+    });
 
     monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
       jsx: monaco.languages.typescript.JsxEmit.Preserve,
       esModuleInterop: true, // 设置 esModuleInterop 会在编译的时候自动加上 default 属性。
     })
+
+    const ata = createATA((code, path) => {
+      monaco.languages.typescript.typescriptDefaults.addExtraLib(code, `file://${path}`)
+    })
+
+    editor.onDidChangeModelContent(() => {
+      ata(editor.getValue())
+    })
+
+    ata(editor.getValue())
   }
+
+  
 
   return (
     <MonacoEditor 
