@@ -30,6 +30,15 @@ export const Editor: React.FC = () => {
       language={'typescript'}
       onMount={handleEditorMount}
       value={code}
+      options={{
+        fontSize: 14, // 设置字体大小
+        scrollBeyondLastLine: false, // 关闭代码超出底部
+        minimap: { enabled: false }, // 关闭小地图
+        scrollbar: { // 横向纵向滚动宽度
+          verticalScrollbarSize: 6, // 设置滚动条宽度
+          horizontalScrollbarSize: 6 // 设置滚动条高度
+        }
+      }}
     />
   )
 }
