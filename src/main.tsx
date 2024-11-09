@@ -1,6 +1,9 @@
 import { createRoot } from 'react-dom/client'
-import { ReactPlayground } from './ReactPlaygound'
+import { ReactPlayground } from './Playground/ReactPlayground'
+import { PlaygroundProvider } from './context/PlaygroundProvider'
 
 createRoot(document.getElementById('root')!).render(
-    <ReactPlayground />
+    <PlaygroundProvider>
+        <ReactPlayground />
+    </PlaygroundProvider>
 )
