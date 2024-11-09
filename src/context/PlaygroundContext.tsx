@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
 export interface File {
   name: string
@@ -17,4 +17,4 @@ export interface PlaygroundContext {
 
 export const PlaygroundContext = createContext<PlaygroundContext>({
   selectedFileName: 'App.tsx',
-} as PlaygroundContext)
+} as PlaygroundContext);

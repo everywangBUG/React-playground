@@ -1,4 +1,4 @@
-import { setupTypeAcquisition } from '@typescript/ata'
+import { setupTypeAcquisition } from '@typescript/ata';
 import typescriprt from 'typescript';
 
 export function createATA(onDownloadFile: (code: string, path: string) => void) {
@@ -12,7 +12,7 @@ export function createATA(onDownloadFile: (code: string, path: string) => void) 
         onDownloadFile(code, path);
       }
     },
-  })
+  });
 
   return ata;
 }

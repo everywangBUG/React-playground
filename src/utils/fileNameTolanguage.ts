@@ -14,4 +14,4 @@ export const fileNameToLanguage = (name: string) => {
     default:
       return 'javascript';
   }
-}
+};

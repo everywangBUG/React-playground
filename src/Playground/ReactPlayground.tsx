@@ -3,7 +3,7 @@ import 'allotment/dist/style.css';
 import { Header } from '../components/Header';
 import { Preview } from '../components/Preview';
 import { CodeEditor } from '../components/CodeEditor';
-import './ReactPlayground.scss'
+import './ReactPlayground.scss';
 
 export const ReactPlayground: React.FC = () => {
   return (
@@ -18,5 +18,5 @@ export const ReactPlayground: React.FC = () => {
         </Allotment.Pane>
       </Allotment>
     </div>
-  )
-}
+  );
+};

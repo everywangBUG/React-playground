@@ -1,5 +1,5 @@
-import logo from '../assets/logo.svg'
-import './Header.scss'
+import logo from '../assets/logo.svg';
+import './Header.scss';
 
 export const Header: React.FC = () => {
   return (
@@ -9,5 +9,5 @@ export const Header: React.FC = () => {
         <span>React Playground</span>
       </div>
     </div>
-  )
-}
+  );
+};

@@ -23,6 +23,10 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      // 双引号
+      'quotes': ['error', 'single'],
+      // 分号结尾
+      'semi': ['error', 'always'],
     },
   },
 )

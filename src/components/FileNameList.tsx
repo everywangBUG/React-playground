@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import { PlaygroundContext } from "../context/PlaygroundContext";
+import { useContext } from 'react';
+import { PlaygroundContext } from '../context/PlaygroundContext';
 
 export const FileNameList: React.FC = () => {
-  const { files, selectedFileName } = useContext(PlaygroundContext)
+  const { files, selectedFileName } = useContext(PlaygroundContext);
 
   
   return (
@@ -14,5 +14,5 @@ export const FileNameList: React.FC = () => {
         )
       }
     </div>
-  )
-}
+  );
+};

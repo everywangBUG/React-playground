@@ -1,5 +1,5 @@
-import { Editor } from "./Editor"
-import { FileNameList } from "./FileNameList"
+import { Editor } from './Editor';
+import { FileNameList } from './FileNameList';
 
 export const CodeEditor: React.FC = () => {
   return (
@@ -7,5 +7,5 @@ export const CodeEditor: React.FC = () => {
       <FileNameList />
       <Editor />
     </div>
-  )
-}
+  );
+};
