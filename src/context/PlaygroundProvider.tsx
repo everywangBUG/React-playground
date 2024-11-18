@@ -11,7 +11,8 @@ export const PlaygroundProvider: React.FC<PropsWithChildren> = (props) => {
     <PlaygroundContext.Provider
       value={{
         files,
-        selectedFileName
+        selectedFileName,
+        setSelectedFileName
       }}
     >
       {children}
