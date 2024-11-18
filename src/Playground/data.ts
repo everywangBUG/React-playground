@@ -1,5 +1,7 @@
 import { Files } from "../context/PlaygroundContext";
-
+import App from "../template/App?raw";
+import AppCss from "../template/App.css?raw";
+import importMap from "../template/import-map.json?raw";
 
 
 export const initFiles: Files = {

@@ -10,6 +10,7 @@ export const FileNameList: React.FC = () => {
       {
         Object.keys(files).map((fileName) => (
           <div key={fileName}>
+            {fileName}
           </div>)
         )
       }
