@@ -13,6 +13,7 @@ export interface Files {
 export interface PlaygroundContext {
   files: Files
   selectedFileName: string
+  setSelectedFileName: (fileName: string) => void
 }
 
 export const PlaygroundContext = createContext<PlaygroundContext>({

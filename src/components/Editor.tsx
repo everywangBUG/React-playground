@@ -1,8 +1,12 @@
 import MonacoEditor, { OnMount } from '@monaco-editor/react';
 import { createATA } from '../utils/ata';
 
-export const Editor: React.FC = () => {
-  const code = `
+interface EditorProps {
+  value?: string
+}
+
+export const Editor: React.FC<EditorProps> = (props) => {
+  const initialCode = `
     export default function App() {
       return (
         <div>
@@ -12,6 +16,8 @@ export const Editor: React.FC = () => {
       )
     }
   `;
+
+  const code = props.value || initialCode
 
   const handleEditorMount: OnMount = (editor, monaco) => {    
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyJ, () => {
