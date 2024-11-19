@@ -1,23 +1,13 @@
 import MonacoEditor, { OnMount } from '@monaco-editor/react';
 import { createATA } from '../utils/ata';
+import { File } from '../context/PlaygroundContext';
 
 interface EditorProps {
-  value?: string
+  file: File
 }
 
 export const Editor: React.FC<EditorProps> = (props) => {
-  const initialCode = `
-    export default function App() {
-      return (
-        <div>
-          Hello World
-          <p>hello world</p>
-        </div>
-      )
-    }
-  `;
-
-  const code = props.value || initialCode
+  const { value, language } = props.file
 
   const handleEditorMount: OnMount = (editor, monaco) => {    
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyJ, () => {
@@ -46,11 +36,11 @@ export const Editor: React.FC<EditorProps> = (props) => {
     <MonacoEditor 
       height='100%'
       path={'index.tsx'}
-      language={'typescript'}
+      language={language}
       onMount={handleEditorMount}
-      value={code}
+      value={value}
       options={{
-        fontSize: 14, // 设置字体大小
+        fontSize: 18, // 设置字体大小
         scrollBeyondLastLine: false, // 关闭代码超出底部
         minimap: { enabled: false }, // 关闭小地图
         scrollbar: { // 横向纵向滚动宽度

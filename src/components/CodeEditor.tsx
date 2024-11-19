@@ -12,7 +12,7 @@ export const CodeEditor: React.FC = () => {
   return (
     <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
       <FileNameList />
-      <Editor value={file.value}/>
+      <Editor file={file}/>
     </div>
   );
 };

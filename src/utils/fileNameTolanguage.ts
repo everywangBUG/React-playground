@@ -3,10 +3,10 @@ export const fileNameToLanguage = (name: string) => {
   switch (suffix) {
     case 'ts':
     case 'tsx':
-      return 'typescriptreact';
+      return 'typescript';
     case 'js':
     case 'jsx':
-      return 'javascriptreact';
+      return 'javascript';
     case 'css':
       return 'css';
     case 'json':
