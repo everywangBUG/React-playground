@@ -1,7 +1,11 @@
 .fileName_list {
   display: flex;
+  border-bottom: 1px solid #ddd;
 
   .fileName_item {
     cursor: pointer;
+    padding: 8px 10px 6px;
+    line-height: 20px;
+    
   }
 }
