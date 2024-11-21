@@ -40,7 +40,7 @@ export const Editor: React.FC<EditorProps> = (props) => {
       onMount={handleEditorMount}
       value={value}
       options={{
-        fontSize: 18, // 设置字体大小
+        fontSize: 12, // 设置字体大小
         scrollBeyondLastLine: false, // 关闭代码超出底部
         minimap: { enabled: false }, // 关闭小地图
         scrollbar: { // 横向纵向滚动宽度

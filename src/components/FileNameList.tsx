@@ -4,7 +4,7 @@ import "./FileNameList.scss";
 import c from "classnames";
 
 export const FileNameList: React.FC = () => {
-  const { files, selectedFileName, setSelectedFileName } = useContext(PlaygroundContext)
+  const { files, selectedFileName, setSelectedFileName, addFile } = useContext(PlaygroundContext)
 
   
   return (
@@ -13,14 +13,18 @@ export const FileNameList: React.FC = () => {
         Object.keys(files).map((fileName) => (
           <div
             key={fileName}
-            className="fileName_item"
+            // className="fileName_item"
             onClick={() => setSelectedFileName(fileName)}
-            
+            className = {c({
+              selected: selectedFileName === fileName
+              }, "fileName_item"
+            )}
           >
             {fileName}
           </div>)
         )
       }
+      <span className={c("fileName_item", "add")} onClick={() => addFile("Untitled", "javascript")}>+</span>
     </div>
   );
 };
