@@ -15,6 +15,7 @@ export interface PlaygroundContext {
   selectedFileName: string
   setSelectedFileName: (fileName: string) => void
   addFile: (fileName: string, language: string) => void
+  setFiles: (files: Files) => void
 }
 
 export const PlaygroundContext = createContext<PlaygroundContext>({

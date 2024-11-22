@@ -3,16 +3,22 @@ import { Editor } from "./Editor"
 import { FileNameList } from "./FileNameList"
 import { PlaygroundContext } from "../context/PlaygroundContext"
 import { initFiles } from "../Playground/data"
+import { debounce } from "lodash-es"
 
 export const CodeEditor: React.FC = () => {
-  const { selectedFileName } = useContext(PlaygroundContext)
+  const { files, setFiles, selectedFileName } = useContext(PlaygroundContext)
   
   const file = initFiles[selectedFileName]
-  console.log(file, 'file99')
+
+  const onEditChange = debounce((value?: string) => {
+    files[file.name].value = value!
+    setFiles({...files})
+  }, 500)
+
   return (
     <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
       <FileNameList />
-      <Editor file={file}/>
+      <Editor file={file} onChange={onEditChange}/>
     </div>
   );
 };

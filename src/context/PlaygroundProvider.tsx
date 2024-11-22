@@ -6,13 +6,26 @@ export const PlaygroundProvider: React.FC<PropsWithChildren> = (props) => {
   const { children } = props;
   const [files, setFiles] = useState<Files>(initFiles)
   const [selectedFileName, setSelectedFileName] = useState('App.tsx')
+
+  const addFile = (fileName: string, language: string) => {
+    setFiles({
+      ...files,
+      [fileName]: {
+        name: fileName,
+        value: '',
+        language
+      }
+    })
+  }
   
   return (
     <PlaygroundContext.Provider
       value={{
         files,
         selectedFileName,
-        setSelectedFileName
+        setSelectedFileName,
+        addFile, 
+        setFiles
       }}
     >
       {children}

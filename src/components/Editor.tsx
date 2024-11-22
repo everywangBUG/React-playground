@@ -4,9 +4,11 @@ import { File } from '../context/PlaygroundContext';
 
 interface EditorProps {
   file: File
+  onChange: (value?: string) => void
 }
 
 export const Editor: React.FC<EditorProps> = (props) => {
+  const { onChange } = props
   const { value, language } = props.file
 
   const handleEditorMount: OnMount = (editor, monaco) => {    
@@ -38,6 +40,7 @@ export const Editor: React.FC<EditorProps> = (props) => {
       path={'index.tsx'}
       language={language}
       onMount={handleEditorMount}
+      onChange={onChange}
       value={value}
       options={{
         fontSize: 12, // 设置字体大小
