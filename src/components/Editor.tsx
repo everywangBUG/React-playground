@@ -4,7 +4,7 @@ import { File } from '../context/PlaygroundContext';
 
 interface EditorProps {
   file: File
-  onChange: (value?: string) => void
+  onChange?: (value?: string) => void
 }
 
 export const Editor: React.FC<EditorProps> = (props) => {
@@ -18,7 +18,7 @@ export const Editor: React.FC<EditorProps> = (props) => {
 
     monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
       jsx: monaco.languages.typescript.JsxEmit.Preserve,
-      esModuleInterop: true, // 设置 esModuleInterop 会在编译的时候自动加上 default 属性。
+      esModuleInterop: true, // 设置 esModuleInterop 会在编译的时候自动加上 default属性。
     });
 
     const ata = createATA((code, path) => {

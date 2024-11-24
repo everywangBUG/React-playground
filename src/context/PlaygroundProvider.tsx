@@ -5,7 +5,7 @@ import { initFiles } from "../Playground/data"
 export const PlaygroundProvider: React.FC<PropsWithChildren> = (props) => {
   const { children } = props;
   const [files, setFiles] = useState<Files>(initFiles)
-  const [selectedFileName, setSelectedFileName] = useState('App.tsx')
+  const [selectedFileName, setSelectedFileName] = useState('main.tsx')
 
   const addFile = (fileName: string, language: string) => {
     setFiles({

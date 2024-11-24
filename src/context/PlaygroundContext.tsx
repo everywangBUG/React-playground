@@ -19,5 +19,5 @@ export interface PlaygroundContext {
 }
 
 export const PlaygroundContext = createContext<PlaygroundContext>({
-  selectedFileName: 'App.tsx',
+  selectedFileName: 'main.tsx',
 } as PlaygroundContext);

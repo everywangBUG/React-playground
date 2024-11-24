@@ -1,7 +1,7 @@
 import { Allotment } from 'allotment';
 import 'allotment/dist/style.css';
 import { Header } from '../components/Header';
-import { Preview } from '../components/Preview';
+import { Preview } from '../preview/Preview';
 import { CodeEditor } from '../components/CodeEditor';
 import './ReactPlayground.scss';
 

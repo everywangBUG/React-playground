@@ -13,7 +13,6 @@ export const FileNameList: React.FC = () => {
         Object.keys(files).map((fileName) => (
           <div
             key={fileName}
-            // className="fileName_item"
             onClick={() => setSelectedFileName(fileName)}
             className = {c({
               selected: selectedFileName === fileName
