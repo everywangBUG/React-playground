@@ -8,7 +8,7 @@ export const babelTransform = (filename: string, code: string, files: Files) => 
     res = transform(code, {
       filename,
       presets: ['react', 'typescript'],
-      plugins: [],
+      plugins: [customResolver(files)],
       retainLines: true
     }).code!
   } catch (e) {
@@ -18,7 +18,7 @@ export const babelTransform = (filename: string, code: string, files: Files) => 
 }
 
 export const getModuleFile = (files: Files, modulePath: string) => {
-  let moduleName = modulePath.split('/').pop() || ''
+  let moduleName = modulePath.split('./').pop() || ''
   if (!moduleName.includes('.')) {
      const realModuleName = Object.keys(files).filter(item => {
        return item.endsWith('.tsx')
@@ -44,13 +44,26 @@ export const customResolver = (files: Files) => {
   return {
     visitor: {
       ImportDeclaration(path) {
-        // path.node.source.value = files[path.node.source.value].value
-        path.node.source.value = '123456'
+        const modulePath = path.node.source.value
+        if (modulePath.startWith('.')) {
+          const file = getModuleFile(files, modulePath)
+          if (!file) {
+            return
+          }
+
+          if (file.name.endsWith('.css')) {
+            path.node.source.value = cssToJs(file)
+          }
+        }
       }
     }
   }
 }
 
-const josnToJs = (file: File) => {
+const jsonToJs = (file: File) => {
+  return jsonToJs(file)
+}
+
+const cssToJs = (file: File) => {
 
 }
