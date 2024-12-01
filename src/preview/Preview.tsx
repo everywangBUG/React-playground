@@ -10,7 +10,6 @@ export const Preview: React.FC = () => {
 
   useEffect(() => {
     const res = compile(files)
-    console.log(res, 'compiledCode')
     setCompiledCode(res)
   }, [files])
   

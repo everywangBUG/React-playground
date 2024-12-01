@@ -1,6 +1,7 @@
 import { transform } from '@babel/standalone'
-import { Files } from '../context/PlaygroundContext'
+import { Files, File } from '../context/PlaygroundContext'
 import { ENTRY_FILE_NAME } from '../Playground/data'
+import { PluginObj } from '@babel/core'
 
 export const babelTransform = (filename: string, code: string, files: Files) => {
   let res = ''
@@ -40,12 +41,19 @@ export const compile = (files: Files) => {
   return babelTransform(ENTRY_FILE_NAME, main.value, files)
 }
 
-export const customResolver = (files: Files) => {
+
+/**
+ * 自定义bable解析器
+ * @param files Files文件
+ * @returns PluginObj
+ */
+export const customResolver = (files: Files): PluginObj => {
   return {
     visitor: {
       ImportDeclaration(path) {
         const modulePath = path.node.source.value
-        if (modulePath.startWith('.')) {
+        console.log(modulePath, '222')
+        if (modulePath.startsWith('.')) {
           const file = getModuleFile(files, modulePath)
           if (!file) {
             return
@@ -53,6 +61,14 @@ export const customResolver = (files: Files) => {
 
           if (file.name.endsWith('.css')) {
             path.node.source.value = cssToJs(file)
+          } else if (file.name.endsWith('.json')) {
+            path.node.source.value = jsonToJs(file)
+          } else {
+            path.node.source.value = URL.createObjectURL(
+              new Blob([babelTransform(file.name, file.value, files)], {
+                type: 'application/javascript'
+              })
+            )
           }
         }
       }
@@ -60,10 +76,34 @@ export const customResolver = (files: Files) => {
   }
 }
 
+/**
+ * 转换json文件为js文件
+ * @param file json文件
+ * @returns blobUrl
+ */
 const jsonToJs = (file: File) => {
-  return jsonToJs(file)
+  const js = `export default ${file.value}`
+  return URL.createObjectURL(new Blob([js], { type: 'application/javascript' }))
 }
 
+/**
+ * css to js 转换css为js
+ * @param file css文件
+ * @returns blobUrl
+ */
 const cssToJs = (file: File) => {
+  const randomId = new Date().getTime()
+  const js = `
+    (() => {
+      const styleSheet = document.createElement('style')
+      styleSheet.setAttribute('id', 'style_${randomId}_${file.name}')
+      document.head.appendChild(styleSheet)
 
+      const styles = document.createTextNode($('${file.value}')
+      styleSheet.innerText = ''
+      styleSheet.appendChild(styles)
+    })())
+  `
+  return URL.createObjectURL(new Blob([js], { type: 'application/javascript' }))
 }
+
