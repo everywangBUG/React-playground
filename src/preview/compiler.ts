@@ -3,10 +3,20 @@ import { Files, File } from '../context/PlaygroundContext'
 import { ENTRY_FILE_NAME } from '../Playground/data'
 import { PluginObj } from '@babel/core'
 
+export const beforeTransformCode = (fileName: string, code: string) => {
+  let _code = code
+  const regexReact = /import\s+React/g
+  if ((fileName.endsWith('.jsx') || fileName.endsWith('.tsx')) && !regexReact.test(code)) {
+    _code = `import React from 'react';\n${_code}`
+  }
+  return code
+}
+
 export const babelTransform = (filename: string, code: string, files: Files) => {
   let res = ''
+  let _code = beforeTransformCode(filename, code)
   try {
-    res = transform(code, {
+    res = transform(_code, {
       filename,
       presets: ['react', 'typescript'],
       plugins: [customResolver(files)],
@@ -32,8 +42,8 @@ export const getModuleFile = (files: Files, modulePath: string) => {
      if (realModuleName) {
       moduleName = realModuleName
      }
-     return files[moduleName]
-  }
+    }
+    return files[moduleName]
 }
 
 export const compile = (files: Files) => {
@@ -52,13 +62,11 @@ export const customResolver = (files: Files): PluginObj => {
     visitor: {
       ImportDeclaration(path) {
         const modulePath = path.node.source.value
-        console.log(modulePath, '222')
         if (modulePath.startsWith('.')) {
           const file = getModuleFile(files, modulePath)
           if (!file) {
             return
           }
-
           if (file.name.endsWith('.css')) {
             path.node.source.value = cssToJs(file)
           } else if (file.name.endsWith('.json')) {
