@@ -7,9 +7,9 @@ export const beforeTransformCode = (fileName: string, code: string) => {
   let _code = code
   const regexReact = /import\s+React/g
   if ((fileName.endsWith('.jsx') || fileName.endsWith('.tsx')) && !regexReact.test(code)) {
-    _code = `import React from 'react';\n${_code}`
+    _code = `import React from 'react';\n${code}`
   }
-  return code
+  return _code
 }
 
 export const babelTransform = (filename: string, code: string, files: Files) => {
@@ -107,10 +107,10 @@ const cssToJs = (file: File) => {
       styleSheet.setAttribute('id', 'style_${randomId}_${file.name}')
       document.head.appendChild(styleSheet)
 
-      const styles = document.createTextNode($('${file.value}')
+      const styles = document.createTextNode(\`${file.value}\`)
       styleSheet.innerText = ''
       styleSheet.appendChild(styles)
-    })())
+    })()
   `
   return URL.createObjectURL(new Blob([js], { type: 'application/javascript' }))
 }
