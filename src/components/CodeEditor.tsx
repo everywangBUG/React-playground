@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { Editor } from "./Editor"
-import { FileNameList } from "./FileNameList"
+import { FileNameList } from "./fileNameList/FileNameList"
 import { PlaygroundContext } from "../context/PlaygroundContext"
 import { initFiles } from "../Playground/data"
 import { debounce } from "lodash-es"

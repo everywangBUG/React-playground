@@ -2,7 +2,7 @@ import { Files } from "../context/PlaygroundContext";
 import App from "../template/App?raw";
 import AppCss from "../template/App.css?raw";
 import ImportMap from "../template/import-map.json?raw";
-import { fileNameToLanguage } from "../utils/fileNameTolanguage";
+import { fileNameToLanguage } from "../utils/fileNameToLanguage";
 import Main from "../template/main?raw";
 
 
