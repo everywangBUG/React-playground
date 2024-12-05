@@ -8,8 +8,7 @@ interface EditorProps {
 }
 
 export const Editor: React.FC<EditorProps> = (props) => {
-  const { onChange } = props
-  const { value, language } = props.file
+  const { onChange, file } = props
 
   const handleEditorMount: OnMount = (editor, monaco) => {    
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyJ, () => {
@@ -38,12 +37,12 @@ export const Editor: React.FC<EditorProps> = (props) => {
     <MonacoEditor 
       height='100%'
       path={'index.tsx'}
-      language={language}
+      language={file.language}
       onMount={handleEditorMount}
       onChange={onChange}
-      value={value}
+      value={file.value}
       options={{
-        fontSize: 12, // 设置字体大小
+        fontSize: 16, // 设置字体大小
         scrollBeyondLastLine: false, // 关闭代码超出底部
         minimap: { enabled: false }, // 关闭小地图
         scrollbar: { // 横向纵向滚动宽度

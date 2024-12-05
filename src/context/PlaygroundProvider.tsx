@@ -8,26 +8,25 @@ export const PlaygroundProvider: React.FC<PropsWithChildren> = (props) => {
   const [files, setFiles] = useState<Files>(initFiles)
   const [selectedFileName, setSelectedFileName] = useState('App.tsx')
 
-  const addFile = (fileName: string, language: string) => {
+  const addFile = (fileName: string) => {
     setFiles({
       ...files,
       [fileName]: {
         name: fileName,
         value: '',
-        language
+        language: fileNameToLanguage(fileName)
       }
     })
   }
 
-  const updateFileName = (preFileName: string, fileName: string) => {
-    console.log(preFileName, fileName, 'nameOrPre888')
-    if (!files[preFileName] || fileName === undefined || fileName === null) return
+  const updateFileName = (preFileName: string, newFileName: string) => {
+    if (!files[preFileName] || !newFileName) return
     const { [preFileName]: value, ...rest } = files
     const newFile = {
-      [fileName]: {
+      [newFileName]: {
         ...value,
-        language: fileNameToLanguage(fileName),
-        name: fileName,
+        language: fileNameToLanguage(newFileName),
+        name: newFileName,
       },
     }
     setFiles({

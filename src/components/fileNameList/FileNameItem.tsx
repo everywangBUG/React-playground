@@ -1,16 +1,17 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import styles from './FileNameItem.module.scss'
 
 interface FileNameItemProps {
   value: string;
   onClick: () => void;
   onEditComplete: (name: string) => void;
+  creating?: boolean
 }
 
 export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
-  const { value, onClick, onEditComplete } = props
+  const { value, onClick, onEditComplete, creating } = props
   const [name, setName] = useState(value)
-  const [editing, setEditing] = useState(false)
+  const [editing, setEditing] = useState(creating)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleDoubleClick = () => {
@@ -19,11 +20,17 @@ export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
       inputRef.current?.focus()
     }, 0)
   }
-
+  
   const handleOnBlur = () => {
     setEditing(false)
     onEditComplete(name)
   }
+
+  useEffect(() => {
+    if (creating) {
+      inputRef.current?.focus()
+    }
+  }, [creating])
   
   return (
     <div onClick={onClick}>
@@ -37,7 +44,7 @@ export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
             onBlur={handleOnBlur}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                setEditing(false)
+                handleOnBlur()
               }
             }}
           />

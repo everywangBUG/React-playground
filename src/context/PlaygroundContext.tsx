@@ -15,7 +15,7 @@ export interface PlaygroundContext {
   selectedFileName: string
   setSelectedFileName: (fileName: string) => void
   updateFileName: (preFileName: string, fileName: string) => void
-  addFile: (fileName: string, language: string) => void
+  addFile: (fileName: string) => void
   setFiles: (files: Files) => void
 }
 
