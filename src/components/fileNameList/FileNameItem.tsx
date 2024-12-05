@@ -1,15 +1,17 @@
-import { useEffect, useRef, useState } from "react"
+import { MouseEventHandler, useEffect, useRef, useState } from "react"
 import styles from './FileNameItem.module.scss'
 
 interface FileNameItemProps {
   value: string;
   onClick: () => void;
   onEditComplete: (name: string) => void;
-  creating?: boolean
+  creating?: boolean;
+  onRemove: MouseEventHandler;
+  readonly: boolean
 }
 
 export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
-  const { value, onClick, onEditComplete, creating } = props
+  const { value, onClick, onEditComplete, creating, onRemove, readonly } = props
   const [name, setName] = useState(value)
   const [editing, setEditing] = useState(creating)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -33,7 +35,7 @@ export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
   }, [creating])
   
   return (
-    <div onClick={onClick}>
+    <div onClick={onClick} className={styles['tabs-item']}>
       {
         editing ? (
           <input
@@ -49,7 +51,17 @@ export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
             }}
           />
         ) : (
-          <span onDoubleClick={handleDoubleClick}>{value}</span>
+          <>
+            <span onDoubleClick={!readonly ? handleDoubleClick : () => {}}>{value}</span>
+            {
+              !readonly ? <span style={{ marginLeft: 5, display: 'flex' }} onClick={onRemove} >
+              <svg width='12' height='12' viewBox="0 0 24 24">
+                <line stroke='#999' x1='18' y1='6' x2='6' y2='18'></line>
+                <line stroke='#999' x1='6' y1='6' x2='18' y2='18'></line>
+              </svg>
+            </span> : null
+            }
+          </>
         )
       }
     </div>

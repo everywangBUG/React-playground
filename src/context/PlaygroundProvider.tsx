@@ -34,6 +34,11 @@ export const PlaygroundProvider: React.FC<PropsWithChildren> = (props) => {
       ...newFile,
     })
   }
+
+  const removeFile = (fileName: string) => {
+    delete files[fileName]
+    setFiles({...files})
+  }
   
   return (
     <PlaygroundContext.Provider
@@ -43,7 +48,8 @@ export const PlaygroundProvider: React.FC<PropsWithChildren> = (props) => {
         setSelectedFileName,
         updateFileName,
         addFile, 
-        setFiles
+        setFiles,
+        removeFile
       }}
     >
       {children}

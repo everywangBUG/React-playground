@@ -3,9 +3,10 @@ import { PlaygroundContext } from "../../context/PlaygroundContext";
 import "./FileNameList.scss";
 import c from "classnames";
 import { FileNameItem } from "./FileNameItem";
+import { APP_COMPONENT_FILE_NAME, ENTRY_FILE_NAME, IMPORT_MAP_FILE_NAME } from "../../Playground/data";
 
 export const FileNameList: React.FC = () => {
-  const { files, selectedFileName, setSelectedFileName, addFile, updateFileName } = useContext(PlaygroundContext)
+  const { files, selectedFileName, setSelectedFileName, addFile, updateFileName, removeFile } = useContext(PlaygroundContext)
 
   const [tabs, setTabs] = useState([''])
   const [creating, setCreating] = useState(false)
@@ -26,6 +27,13 @@ export const FileNameList: React.FC = () => {
     setCreating(true)
   }
 
+  const handleOnRemove = (fileName: string) => {
+    removeFile(fileName)
+    setSelectedFileName(ENTRY_FILE_NAME)
+  }
+
+  const readonlyFileNames = [ENTRY_FILE_NAME, IMPORT_MAP_FILE_NAME, APP_COMPONENT_FILE_NAME]
+
   return (
     <div className="fileName_list">
       {
@@ -41,8 +49,13 @@ export const FileNameList: React.FC = () => {
             <FileNameItem
               onClick={() => setSelectedFileName(fileName)}
               value={fileName}
+              readonly={readonlyFileNames.includes(fileName)}
               onEditComplete={(name: string) => handleEditComplete(name, fileName)}
               creating={creating && index === arr.length - 1 }
+              onRemove={(e) => {
+                e.stopPropagation()
+                handleOnRemove(fileName)
+              }}
             />
           </div>
         ))

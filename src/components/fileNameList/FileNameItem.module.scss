@@ -1,7 +1,13 @@
-.tabs-item-input {
-  width: 90px;
-  
-  outline: none;
-  border: none;
-  color: #6bf0ff;
+.tabs-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .tabs-item-input {
+    width: 90px;
+    
+    outline: none;
+    border: none;
+    color: #6bf0ff;
+  }
 }

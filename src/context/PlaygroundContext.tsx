@@ -17,6 +17,7 @@ export interface PlaygroundContext {
   updateFileName: (preFileName: string, fileName: string) => void
   addFile: (fileName: string) => void
   setFiles: (files: Files) => void
+  removeFile: (fileName: string) => void
 }
 
 export const PlaygroundContext = createContext<PlaygroundContext>({
