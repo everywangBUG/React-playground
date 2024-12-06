@@ -9,6 +9,7 @@ interface EditorProps {
 
 export const Editor: React.FC<EditorProps> = (props) => {
   const { onChange, file } = props
+  if (!file) return
 
   const handleEditorMount: OnMount = (editor, monaco) => {    
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyJ, () => {
