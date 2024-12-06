@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { PlaygroundContext } from "../../context/PlaygroundContext"
 import "./FileNameList.scss"
 import c from "classnames"
@@ -52,8 +52,7 @@ export const FileNameList: React.FC = () => {
               readonly={readonlyFileNames.includes(fileName)}
               onEditComplete={(name: string) => handleEditComplete(name, fileName)}
               creating={creating && index === arr.length - 1 }
-              onRemove={(e) => {
-                e.stopPropagation()
+              onRemove={() => {
                 handleOnRemove(fileName)
               }}
             />
