@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react"
 import { PlaygroundContext } from "../context/PlaygroundContext"
-import { compile } from './compiler'
-import iframeHtml from './iframe.html?raw'
+import { compile } from "./compiler"
+import iframeHtml from "./iframe.html?raw"
 import { IMPORT_MAP_FILE_NAME } from "../Playground/data"
 
 export const Preview: React.FC = () => {
   const {files} = useContext(PlaygroundContext)
 
-  const [compiledCode, setCompiledCode] = useState('')
+  const [compiledCode, setCompiledCode] = useState("")
 
   useEffect(() => {
     const res = compile(files)
@@ -15,14 +15,14 @@ export const Preview: React.FC = () => {
   }, [files])
 
   const getIframeUrl = () => {
-    let res = iframeHtml.replace(
-      '<script type="importmap"></script>',
+    const res = iframeHtml.replace(
+      "<script type=\"importmap\"></script>",
       `<script type="importmap">${files[IMPORT_MAP_FILE_NAME].value}</script>`
     ).replace(
-      '<script type="module" id="appSrc"></script>',
+      "<script type=\"module\" id=\"appSrc\"></script>",
       `<script type="module" id="appSrc">\n${compiledCode}\n</script>`
     )
-    return URL.createObjectURL(new Blob([res], {type: 'text/html'}))
+    return URL.createObjectURL(new Blob([res], {type: "text/html"}))
   }
 
   const [iframeUrl, setIframeUrl] = useState(getIframeUrl())
@@ -32,7 +32,7 @@ export const Preview: React.FC = () => {
   }, [files[IMPORT_MAP_FILE_NAME].value, compiledCode])
   
   return (
-    <div style={{height: '100%'}}>
+    <div style={{height: "100%"}}>
       {/* <Editor file={{
         name: 'dist.js',
         value: compiledCode,
@@ -41,9 +41,9 @@ export const Preview: React.FC = () => {
       <iframe
         src={iframeUrl}
         style={{
-          width: '100%',
-          height: '100%',
-          border: 'none'
+          width: "100%",
+          height: "100%",
+          border: "none"
         }}
       />
     </div>

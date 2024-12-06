@@ -15,9 +15,9 @@ export const CodeEditor: React.FC = () => {
   }, 500)
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
+    <div style={{display: "flex", flexDirection: "column", height: "100%"}}>
       <FileNameList />
       <Editor file={file} onChange={onEditChange}/>
     </div>
-  );
-};
+  )
+}

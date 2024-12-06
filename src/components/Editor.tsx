@@ -1,6 +1,6 @@
-import MonacoEditor, { OnMount } from '@monaco-editor/react';
-import { createATA } from '../utils/ata';
-import { File } from '../context/PlaygroundContext';
+import MonacoEditor, { OnMount } from "@monaco-editor/react"
+import { createATA } from "../utils/ata"
+import { File } from "../context/PlaygroundContext"
 
 interface EditorProps {
   file: File
@@ -12,31 +12,31 @@ export const Editor: React.FC<EditorProps> = (props) => {
 
   const handleEditorMount: OnMount = (editor, monaco) => {    
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyJ, () => {
-      editor.getAction('editor.action.formatDocument')?.run();
-    });
+      editor.getAction("editor.action.formatDocument")?.run()
+    })
 
     monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
       jsx: monaco.languages.typescript.JsxEmit.Preserve,
       esModuleInterop: true, // 设置 esModuleInterop 会在编译的时候自动加上 default属性。
-    });
+    })
 
     const ata = createATA((code, path) => {
-      monaco.languages.typescript.typescriptDefaults.addExtraLib(code, `file://${path}`);
-    });
+      monaco.languages.typescript.typescriptDefaults.addExtraLib(code, `file://${path}`)
+    })
 
     editor.onDidChangeModelContent(() => {
-      ata(editor.getValue());
-    });
+      ata(editor.getValue())
+    })
 
-    ata(editor.getValue());
-  };
+    ata(editor.getValue())
+  }
 
   
 
   return (
     <MonacoEditor 
       height='100%'
-      path={'index.tsx'}
+      path={"index.tsx"}
       language={file.language}
       onMount={handleEditorMount}
       onChange={onChange}
@@ -51,7 +51,7 @@ export const Editor: React.FC<EditorProps> = (props) => {
         }
       }}
     />
-  );
-};
+  )
+}
 
 

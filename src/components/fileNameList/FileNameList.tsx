@@ -1,14 +1,14 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { PlaygroundContext } from "../../context/PlaygroundContext";
-import "./FileNameList.scss";
-import c from "classnames";
-import { FileNameItem } from "./FileNameItem";
-import { APP_COMPONENT_FILE_NAME, ENTRY_FILE_NAME, IMPORT_MAP_FILE_NAME } from "../../Playground/data";
+import { useContext, useEffect, useRef, useState } from "react"
+import { PlaygroundContext } from "../../context/PlaygroundContext"
+import "./FileNameList.scss"
+import c from "classnames"
+import { FileNameItem } from "./FileNameItem"
+import { APP_COMPONENT_FILE_NAME, ENTRY_FILE_NAME, IMPORT_MAP_FILE_NAME } from "../../Playground/data"
 
 export const FileNameList: React.FC = () => {
   const { files, selectedFileName, setSelectedFileName, addFile, updateFileName, removeFile } = useContext(PlaygroundContext)
 
-  const [tabs, setTabs] = useState([''])
+  const [tabs, setTabs] = useState([""])
   const [creating, setCreating] = useState(false)
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export const FileNameList: React.FC = () => {
   }
 
   const addTab = () => {
-    const newFileName = 'Comp' + Math.random().toString().slice(2, 6) + '.tsx'
+    const newFileName = "Comp" + Math.random().toString().slice(2, 6) + ".tsx"
     addFile(newFileName)
     setSelectedFileName(newFileName)
     setCreating(true)
@@ -43,7 +43,7 @@ export const FileNameList: React.FC = () => {
             onClick={() => setSelectedFileName(fileName)}
             className = {c({
               selected: selectedFileName === fileName
-              }, "fileName_item"
+            }, "fileName_item"
             )}
           >
             <FileNameItem
@@ -62,5 +62,5 @@ export const FileNameList: React.FC = () => {
       }
       <span className={c("fileName_item", "add")} onClick={addTab}>+</span>
     </div>
-  );
-};
+  )
+}

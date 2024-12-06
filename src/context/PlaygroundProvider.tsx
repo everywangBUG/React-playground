@@ -1,19 +1,19 @@
 import { PropsWithChildren, useState } from "react"
 import { Files, PlaygroundContext } from "./PlaygroundContext"
 import { initFiles } from "../Playground/data"
-import { fileNameToLanguage } from "../utils/fileNameToLanguage";
+import { fileNameToLanguage } from "../utils/fileNameToLanguage"
 
 export const PlaygroundProvider: React.FC<PropsWithChildren> = (props) => {
-  const { children } = props;
+  const { children } = props
   const [files, setFiles] = useState<Files>(initFiles)
-  const [selectedFileName, setSelectedFileName] = useState('App.tsx')
+  const [selectedFileName, setSelectedFileName] = useState("App.tsx")
 
   const addFile = (fileName: string) => {
     setFiles({
       ...files,
       [fileName]: {
         name: fileName,
-        value: '',
+        value: "",
         language: fileNameToLanguage(fileName)
       }
     })
@@ -54,5 +54,5 @@ export const PlaygroundProvider: React.FC<PropsWithChildren> = (props) => {
     >
       {children}
     </PlaygroundContext.Provider>
-  );
-};
+  )
+}
