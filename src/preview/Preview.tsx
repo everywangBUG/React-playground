@@ -3,6 +3,7 @@ import { PlaygroundContext } from "../context/PlaygroundContext"
 import { compile } from "./compiler"
 import iframeHtml from "./iframe.html?raw"
 import { IMPORT_MAP_FILE_NAME } from "../Playground/data"
+import { Message } from "../components/message/Message"
 
 export const Preview: React.FC = () => {
   const {files} = useContext(PlaygroundContext)
@@ -33,11 +34,6 @@ export const Preview: React.FC = () => {
   
   return (
     <div style={{height: "100%"}}>
-      {/* <Editor file={{
-        name: 'dist.js',
-        value: compiledCode,
-        language: 'javascript'
-      }}/> */}
       <iframe
         src={iframeUrl}
         style={{
@@ -46,6 +42,7 @@ export const Preview: React.FC = () => {
           border: "none"
         }}
       />
+      <Message type="warning" content={new Error().stack!.toString()} />
     </div>
   )
 }
