@@ -42,7 +42,7 @@ export const Preview: React.FC = () => {
           border: "none"
         }}
       />
-      <Message type="warning" content={new Error().stack!.toString()} />
+      <Message type="error" content={new Error().stack!.toString()} />
     </div>
   )
 }

@@ -3,7 +3,7 @@ import s from "./Message.module.scss"
 import c from "classnames"
 
 interface MessageProps {
-  type: "error" | "warning"
+  type: "error" | "warn"
   content: string
 }
 
