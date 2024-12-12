@@ -5,10 +5,19 @@ import iframeHtml from "./iframe.html?raw"
 import { IMPORT_MAP_FILE_NAME } from "../Playground/data"
 import { Message } from "../components/message/Message"
 
+interface MessageData {
+  data: {
+    message: string
+    type: string
+  }
+}
+
 export const Preview: React.FC = () => {
   const {files} = useContext(PlaygroundContext)
 
   const [compiledCode, setCompiledCode] = useState("")
+
+  const [error, setError] = useState("")
 
   useEffect(() => {
     const res = compile(files)
@@ -31,6 +40,20 @@ export const Preview: React.FC = () => {
   useEffect(() => {
     setIframeUrl(getIframeUrl())
   }, [files[IMPORT_MAP_FILE_NAME].value, compiledCode])
+
+  const handleMessage = (msg: MessageData) => {
+    const { type, message } = msg.data
+    if (type === "Error") {
+      setError(message)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("message", handleMessage)
+    return () => {
+      window.removeEventListener("message", handleMessage)
+    }
+  })
   
   return (
     <div style={{height: "100%"}}>
@@ -42,7 +65,7 @@ export const Preview: React.FC = () => {
           border: "none"
         }}
       />
-      <Message type="error" content={new Error().stack!.toString()} />
+      <Message type="error" content={error} />
     </div>
   )
 }
