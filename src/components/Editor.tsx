@@ -1,14 +1,16 @@
 import MonacoEditor, { OnMount } from "@monaco-editor/react"
 import { createATA } from "../utils/ata"
 import { File } from "../context/PlaygroundContext"
+import { editor } from "monaco-editor"
 
 interface EditorProps {
   file: File
   onChange?: (value?: string) => void
+  options?: editor.IStandaloneEditorConstructionOptions
 }
 
 export const Editor: React.FC<EditorProps> = (props) => {
-  const { onChange, file } = props
+  const { onChange, file, options } = props
   if (!file) return
 
   const handleEditorMount: OnMount = (editor, monaco) => {    
@@ -49,7 +51,8 @@ export const Editor: React.FC<EditorProps> = (props) => {
         scrollbar: { // 横向纵向滚动宽度
           verticalScrollbarSize: 6, // 设置滚动条宽度
           horizontalScrollbarSize: 6 // 设置滚动条高度
-        }
+        },
+        ...options
       }}
     />
   )

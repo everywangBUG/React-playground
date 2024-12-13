@@ -5,7 +5,7 @@ import { PlaygroundContext } from "../context/PlaygroundContext"
 import { debounce } from "lodash-es"
 
 export const CodeEditor: React.FC = () => {
-  const { files, setFiles, selectedFileName } = useContext(PlaygroundContext)
+  const { files, setFiles, selectedFileName, theme } = useContext(PlaygroundContext)
   
   const file = files[selectedFileName]
 
@@ -17,7 +17,7 @@ export const CodeEditor: React.FC = () => {
   return (
     <div style={{display: "flex", flexDirection: "column", height: "100%"}}>
       <FileNameList />
-      <Editor file={file} onChange={onEditChange}/>
+      <Editor file={file} onChange={onEditChange} options={{theme: `vs-${theme}`}} />
     </div>
   )
 }
