@@ -2,12 +2,13 @@ import { useContext } from "react"
 import logo from "../assets/logo.svg"
 import { PlaygroundContext } from "../context/PlaygroundContext"
 import "./Header.scss"
-import { MoonOutlined, ShareAltOutlined, SunOutlined } from "@ant-design/icons"
+import { DownloadOutlined, MoonOutlined, ShareAltOutlined, SunOutlined } from "@ant-design/icons"
 import copy from "copy-to-clipboard"
 import { message } from "antd"
+import { downloadFiles } from "../utils/utils"
 
 export const Header: React.FC = () => {
-  const { theme, setTheme } = useContext(PlaygroundContext)
+  const { theme, setTheme, files } = useContext(PlaygroundContext)
 
   return (
     <div className='header'>
@@ -35,6 +36,13 @@ export const Header: React.FC = () => {
           onClick={() => {
             copy(window.location.href)
             message.success("已复制链接")
+          }}
+        />
+        <DownloadOutlined
+          style={{marginLeft: "10px"}}
+          onClick={async () => {
+            await downloadFiles(files)
+            message.success("下载完成")
           }}
         />
       </div>

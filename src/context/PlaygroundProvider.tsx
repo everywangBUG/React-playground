@@ -19,7 +19,7 @@ export const PlaygroundProvider: React.FC<PropsWithChildren> = (props) => {
   const { children } = props
   const [files, setFiles] = useState<Files>(getFileFromUrl() || initFiles)
   const [selectedFileName, setSelectedFileName] = useState("App.tsx")
-  const [theme, setTheme] = useState<Theme>("dark")
+  const [theme, setTheme] = useState<Theme>("light")
 
 
   const addFile = (fileName: string) => {
