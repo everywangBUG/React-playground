@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { PlaygroundContext } from "../context/PlaygroundContext"
 import { compile } from "./compiler"
 import iframeHtml from "./iframe.html?raw"
-import { IMPORT_MAP_FILE_NAME } from "../Playground/data"
+import { IMPORT_MAP_FILE_NAME } from "../playground/data"
 import { Message } from "../components/message/Message"
 
 interface MessageData {

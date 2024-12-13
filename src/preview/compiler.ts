@@ -1,6 +1,6 @@
 import { transform } from "@babel/standalone"
 import { Files, File } from "../context/PlaygroundContext"
-import { ENTRY_FILE_NAME } from "../Playground/data"
+import { ENTRY_FILE_NAME } from "../playground/data"
 import { PluginObj } from "@babel/core"
 
 export const beforeTransformCode = (fileName: string, code: string) => {

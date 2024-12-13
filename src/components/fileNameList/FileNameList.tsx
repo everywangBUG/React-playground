@@ -3,7 +3,7 @@ import { PlaygroundContext } from "../../context/PlaygroundContext"
 import "./FileNameList.scss"
 import c from "classnames"
 import { FileNameItem } from "./FileNameItem"
-import { APP_COMPONENT_FILE_NAME, ENTRY_FILE_NAME, IMPORT_MAP_FILE_NAME } from "../../Playground/data"
+import { APP_COMPONENT_FILE_NAME, ENTRY_FILE_NAME, IMPORT_MAP_FILE_NAME } from "../../playground/data"
 
 export const FileNameList: React.FC = () => {
   const { files, selectedFileName, setSelectedFileName, addFile, updateFileName, removeFile } = useContext(PlaygroundContext)

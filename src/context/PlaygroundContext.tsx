@@ -10,7 +10,11 @@ export interface Files {
   [key: string]: File
 }
 
+export type Theme = "light" | "dark"
+
 export interface PlaygroundContext {
+  theme: Theme
+  setTheme: (theme: Theme) => void
   files: Files
   selectedFileName: string
   setSelectedFileName: (fileName: string) => void
